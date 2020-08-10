@@ -1,0 +1,25 @@
+<!-- <h2>{{hero.name | uppercase}} details</h2>
+
+<p>id: {{hero.id}}</p>
+<div>
+    <input type="text" placeholder="name" [(ngModel)]="hero.name"> 
+</div>
+ -->
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+
+<!-- If the value of selectedHero is undefined, Angular removes this
+element from the DOM -->
+<div *ngIf="selectedHero">
+  <h2>{{selectedHero.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{selectedHero.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="selectedHero.name" placeholder="name"/>
+    </label>
+  </div>
+</div>
