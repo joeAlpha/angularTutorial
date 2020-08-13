@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
+// import { HEROES } from './mock-heroes';
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
@@ -8,15 +9,12 @@ import { HEROES } from './mock-heroes';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
- /*  hero: Hero = {
-    id: 0,
-    name: 'Super Joe'
-  }; */
 
   selectedHero: Hero;
-  heroes = HEROES;
+  heroes: Hero[];
 
-  constructor() { }
+  // Injection of the service
+  constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
   }
@@ -24,5 +22,10 @@ export class HeroesComponent implements OnInit {
   // Responds to click event in the template
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+  }
+
+  // Retrieves all heroes from the service injected
+  getHeroes(): void {
+    this.heroes = this.heroService.getHeroes();
   }
 }
