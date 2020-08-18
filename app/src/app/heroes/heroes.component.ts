@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
+import { HeroServiceService } from '../hero-service.service'; // Imports the dependency
+import { MessageService } from '../message.service';
+
 
 @Component({
   selector: 'app-heroes',
@@ -8,21 +11,29 @@ import { HEROES } from './mock-heroes';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
- /*  hero: Hero = {
-    id: 0,
-    name: 'Super Joe'
-  }; */
-
   selectedHero: Hero;
-  heroes = HEROES;
+  heroes: Hero[]; // This data will be fetched from the service injected
 
-  constructor() { }
+  // Injections occurs in the constructor
+  constructor(
+    private heroService: HeroServiceService,
+    private messageService: MessageService) { }
 
+  // Lifecycle hook (after construction of the component)
   ngOnInit(): void {
+    this.getHeroes();
   }
 
   // Responds to click event in the template
   onSelect(hero: Hero): void {
+    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
     this.selectedHero = hero;
+  }
+
+  // Retrieves all heroes from the service injected
+  getHeroes(): void {
+    this.heroService.getHeroes()
+        // Subscribe method is critical, 'cause lets the asynchronus operation happen
+        .subscribe(heroes => this.heroes = heroes);
   }
 }
