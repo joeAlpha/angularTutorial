@@ -9,31 +9,18 @@ import { MessageService } from '../message.service';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css']
 })
-export class HeroesComponent implements OnInit {
 
-  selectedHero: Hero;
+export class HeroesComponent implements OnInit {
   heroes: Hero[];
 
-  // Injection of the service
-  constructor(
-    private heroService: HeroService, 
-    private messageService: MessageService
-    ) { }
+  constructor(private heroService: HeroService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getHeroes();
   }
 
-  // Responds to click event in the template
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-  }
-
-  // Retrieves all heroes from the service injected
   getHeroes(): void {
     this.heroService.getHeroes()
-      // Critical: asynchronys response from the server
-      .subscribe(heroes => this.heroes = heroes);
+    .subscribe(heroes => this.heroes = heroes);
   }
 }
