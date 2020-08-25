@@ -1,3 +1,9 @@
 <h1>{{title}}</h1>
-<app-heroes></app-heroes>
+<nav>
+    <!-- routerLink is a selector of RouterLink directive which
+    turns a link into a router navigation. -->
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/heroes">Heroes</a>
+</nav>
+<router-outlet></router-outlet>
 <app-messages></app-messages>

@@ -11,7 +11,7 @@ import { MessageService } from '../message.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  selectedHero: Hero;
+  // selectedHero: Hero;
   heroes: Hero[]; // This data will be fetched from the service injected
 
   // Injections occurs in the constructor
@@ -25,10 +25,10 @@ export class HeroesComponent implements OnInit {
   }
 
   // Responds to click event in the template
-  onSelect(hero: Hero): void {
+/*   onSelect(hero: Hero): void {
     this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
     this.selectedHero = hero;
-  }
+  } */
 
   // Retrieves all heroes from the service injected
   getHeroes(): void {
